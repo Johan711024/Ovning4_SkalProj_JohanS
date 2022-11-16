@@ -224,7 +224,75 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            Console.WriteLine("Mata in + eller -. Tillbaka, skriv Q");
+            bool ExitExamineStack = false;
+
+
+
+            Stack<string> theStack = new Stack<string>();
+
+
+            do
+            {
+
+                string input = Console.ReadLine()!;
+                char nav = input[0];
+                string value = input.Substring(1);
+
+
+                ReverseString(value);
+
+                switch (nav)
+                {
+                    case '+':
+                        
+                        theStack.Push(value);
+                        break;
+                    case '-':
+                        theStack.Pop();
+                        break;
+                    case 'Q':
+                        ExitExamineStack = true;
+                        break;
+                    case 'q':
+                        ExitExamineStack = true;
+                        break;
+                }
+                Console.WriteLine($"\nStacken innehåller:");
+
+                for (int i = 0; i < theStack.Count; i++)
+                {
+                    Console.WriteLine(theStack.ElementAt(i));
+                }
+
+
+
+
+
+            } while (!ExitExamineStack);
         }
+
+        static void ReverseString(string toStack)
+        {
+            Stack <Char> chars = new Stack<Char>();
+            
+            for(int i = 0; i<toStack.Length; i++)
+            {
+                chars.Push(toStack.ElementAt(i));
+            }
+            chars.Reverse();
+
+            foreach (object str in chars)
+            {
+                String s = str.ToString()!;
+                Console.Write(s);
+            }
+
+               
+            
+        }
+    
 
         static void CheckParanthesis()
         {
