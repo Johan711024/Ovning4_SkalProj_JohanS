@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -165,6 +166,52 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+
+            Console.WriteLine("Mata in + eller -. Tillbaka, skriv Q");
+            bool ExitExamineQueue = false;
+            
+            
+
+            Queue<string> theQueue = new Queue<string>();
+            
+
+            do
+            {
+
+                string input = Console.ReadLine()!;
+                char nav = input[0];
+                string value = input.Substring(1);
+
+
+
+
+                switch (nav)
+                {
+                    case '+':
+                        theQueue.Enqueue(value);
+                        break;
+                    case '-':
+                        theQueue.Dequeue();
+                        break;
+                    case 'Q':
+                        ExitExamineQueue = true;
+                        break;
+                    case 'q':
+                        ExitExamineQueue = true;
+                        break;
+                }
+                Console.WriteLine($"Listan innehåller:");
+
+                //theQueue.theQueue.ForEach(item => { Console.WriteLine($"{item}"); });
+
+                for(int i=0; i< theQueue.Count; i++)
+                {
+                    Console.WriteLine(theQueue.ElementAt(i));
+                }
+
+                
+
+            } while (!ExitExamineQueue);
         }
 
         /// <summary>
