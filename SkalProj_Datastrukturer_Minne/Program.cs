@@ -302,6 +302,47 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            Console.WriteLine("Mata in en sträng. Tillbaka, skriv Q");
+            bool ExitCheckParanthesis = false;
+
+
+
+           
+
+            do
+            {
+
+                string input = Console.ReadLine()!;
+                
+
+
+                CheckString(input);
+
+                
+                Console.WriteLine($"\nStacken innehåller:");
+
+                
+
+
+
+
+
+            } while (!ExitCheckParanthesis);
+
+        }
+
+        static void CheckString(string toCheck)
+        {
+            
+
+            for (int i = 0; i < toCheck.Length; i++)
+            {
+                if (toCheck.ElementAt(i).Equals("{"))
+                {
+                    //sätt flagga att nästa måste vara ([ eller }...fortsätt loopa...osv
+                }
+            }
+  
         }
 
     }
