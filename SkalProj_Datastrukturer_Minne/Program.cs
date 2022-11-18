@@ -275,21 +275,19 @@ namespace SkalProj_Datastrukturer_Minne
 
         static void ReverseString(string toStack)
         {
-            Stack <Char> chars = new Stack<Char>();
+            Stack<Char> chars = new Stack<Char>();
             
             for(int i = 0; i<toStack.Length; i++)
             {
                 chars.Push(toStack.ElementAt(i));
             }
-            chars.Reverse();
 
-            foreach (object str in chars)
+
+            for (int i = 0; i < chars.Count; i++)
             {
-                String s = str.ToString()!;
-                Console.Write(s);
-            }
 
-               
+                Console.Write(chars.Pop());
+            }              
             
         }
     
@@ -305,44 +303,104 @@ namespace SkalProj_Datastrukturer_Minne
             Console.WriteLine("Mata in en sträng. Tillbaka, skriv Q");
             bool ExitCheckParanthesis = false;
 
-
-
-           
+            //string input= "({[<>]})[]()";
 
             do
             {
 
                 string input = Console.ReadLine()!;
+
+                if (input == "q" || input == "Q")
+                    ExitCheckParanthesis = true;
                 
-
-
                 CheckString(input);
-
-                
-                Console.WriteLine($"\nStacken innehåller:");
-
-                
-
-
-
 
 
             } while (!ExitCheckParanthesis);
 
         }
 
-        static void CheckString(string toCheck)
+        static void CheckString(string toStack)
         {
-            
 
-            for (int i = 0; i < toCheck.Length; i++)
+            int parentesisOpen = 0;
+            int parentesisClose = 0;
+            bool startWithRightParentesis = false;
+
+            Stack<Char> chars = new Stack<Char>();
+
+            Console.WriteLine($"På Stacken:");
+
+            for (int i = 0; i < toStack.Length; i++)
             {
-                if (toCheck.ElementAt(i).Equals("{"))
+                if (toStack.ElementAt(i).Equals('(') || toStack.ElementAt(i).Equals(')'))
                 {
-                    //sätt flagga att nästa måste vara ([ eller }...fortsätt loopa...osv
+                    chars.Push(toStack.ElementAt(i));
+                    Console.Write($"{toStack.ElementAt(i)}");
                 }
             }
-  
+
+            //för många cases...måste finnas enklare sätt som lärare tycker att jag ska göra på...
+
+            if (chars.ElementAt(chars.Count-1).Equals(')')){
+                startWithRightParentesis = true;
+            }
+            else { 
+            
+                foreach(char c in chars)
+                {
+                    if(c == ')')
+                    {
+                        parentesisClose++;
+                    }
+                    if (c == '(')
+                    {
+                        parentesisOpen++;
+                    }
+
+
+                }
+
+            }
+
+            //for (int i = chars.Count-1; i >=0; i--)
+            //{
+
+
+            //    if (chars.ElementAt(i).Equals('(')) 
+            //    {
+            //        parentesisOpen ++;  
+            //    }
+            //    if (chars.ElementAt(i).Equals(')'))
+            //    {
+            //        parentesisClose++;
+            //    }
+            //    //if (parentesisClose>parentesisOpen)
+            //    //{
+            //    //    Console.WriteLine("Ej välformad");
+                    
+            //    //    break;
+            //    //}
+
+            //    Console.WriteLine($"\nPop: {chars.Pop()}");
+            //}
+
+            if (parentesisClose != parentesisOpen && !startWithRightParentesis)
+            {
+                Console.WriteLine("Ej välformad");
+                return;
+            }
+            else if (startWithRightParentesis)
+            {
+                Console.WriteLine("Ej välformad");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Välformad");
+                return;
+            }
+
         }
 
     }
