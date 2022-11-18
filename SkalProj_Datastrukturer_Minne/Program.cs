@@ -323,81 +323,48 @@ namespace SkalProj_Datastrukturer_Minne
         static void CheckString(string toStack)
         {
 
-            int parentesisOpen = 0;
-            int parentesisClose = 0;
-            bool startWithRightParentesis = false;
+            
 
             Stack<Char> chars = new Stack<Char>();
 
-            Console.WriteLine($"På Stacken:");
+            
 
             for (int i = 0; i < toStack.Length; i++)
             {
-                if (toStack.ElementAt(i).Equals('(') || toStack.ElementAt(i).Equals(')'))
+                if (toStack.ElementAt(0).Equals(')')){
+                    chars.Push(toStack.ElementAt(0));
+                    break;
+                }
+                if (toStack.ElementAt(i).Equals('(') )
                 {
                     chars.Push(toStack.ElementAt(i));
-                    Console.Write($"{toStack.ElementAt(i)}");
-                }
-            }
-
-            //för många cases...måste finnas enklare sätt som lärare tycker att jag ska göra på...
-
-            if (chars.ElementAt(chars.Count-1).Equals(')')){
-                startWithRightParentesis = true;
-            }
-            else { 
-            
-                foreach(char c in chars)
-                {
-                    if(c == ')')
-                    {
-                        parentesisClose++;
-                    }
-                    if (c == '(')
-                    {
-                        parentesisOpen++;
-                    }
-
-
-                }
-
-            }
-
-            //for (int i = chars.Count-1; i >=0; i--)
-            //{
-
-
-            //    if (chars.ElementAt(i).Equals('(')) 
-            //    {
-            //        parentesisOpen ++;  
-            //    }
-            //    if (chars.ElementAt(i).Equals(')'))
-            //    {
-            //        parentesisClose++;
-            //    }
-            //    //if (parentesisClose>parentesisOpen)
-            //    //{
-            //    //    Console.WriteLine("Ej välformad");
                     
-            //    //    break;
-            //    //}
+                }
 
-            //    Console.WriteLine($"\nPop: {chars.Pop()}");
-            //}
+                if(toStack.ElementAt(i) == ')')
+                {
+                    //kolla med char.Peek om den överst i stacken matchar
+                       // om ja, char.Pop
+                       // om nej, vet vi redan här att icke välformad
 
-            if (parentesisClose != parentesisOpen && !startWithRightParentesis)
-            {
-                Console.WriteLine("Ej välformad");
-                return;
+                    if (chars.Peek() == '('){
+                        chars.Pop();
+                    }
+                }
+
             }
-            else if (startWithRightParentesis)
-            {
-                Console.WriteLine("Ej välformad");
-                return;
-            }
-            else
+
+            
+
+            if (chars.Count()==0)
             {
                 Console.WriteLine("Välformad");
+                return;
+            }
+            
+            else
+            {
+                Console.WriteLine("Ej Välformad");
                 return;
             }
 
